@@ -21,7 +21,7 @@
 
 <form
 	method="POST"
-	action="/api/forms/secret-santa-form"
+	action="/submit"
 	onsubmit={event => {
 		if (formError) {
 			event.preventDefault()
