@@ -1,0 +1,45 @@
+:root {
+	font-family:
+		Manrope,
+		Roboto,
+		Segoe UI,
+		sans-serif;
+	font-size: calc(1em + 0.2vw);
+	letter-spacing: 0.01em;
+	font-weight: 480;
+	line-height: 1.5em;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	margin: 1rem 0;
+}
+
+strong,
+b {
+	font-weight: 800;
+}
+
+h1 {
+	text-align: center;
+	font-size: calc(1.8rem + 0.7vw);
+	margin: 0 0 2rem 0;
+	line-height: 150%;
+}
+
+a {
+	color: #003bc6;
+	font-weight: 550;
+	text-underline-offset: 4px;
+	text-decoration-thickness: 1.4px;
+
+	&:hover,
+	&:focus {
+		color: #0b54ff;
+		text-decoration-color: magenta;
+	}
+}
