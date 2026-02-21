@@ -54,5 +54,5 @@ export async function POST({ request, platform }): Promise<Response> {
 
 	const url = new URL('/angemeldet', request.url)
 	url.searchParams.set('id', v4())
-	return Response.redirect(url, 307)
+	return Response.redirect(url, 303)
 }
