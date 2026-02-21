@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit'
 import { formDataText } from '../../backend/helper'
 import { escapeHtml } from '../../backend/sanitize'
+import { v4 } from 'uuid'
 
 export async function POST({ request, platform }): Promise<Response> {
 	if (!platform) error(500, 'Platform not available')
@@ -41,15 +42,17 @@ export async function POST({ request, platform }): Promise<Response> {
 		subject: `Anmeldung: ${name}`,
 		html: `<!DOCTYPE html>
 <html>
-<body style="font-family: Segoe UI, Roboto, sans-serif; font-size: 14px;">
+<body style="font-family: Segoe UI, Roboto, sans-serif; font-size: 16px;">
   <p><b>Name</b>: ${escapeHtml(name)}</p>
   <p><b>Alter</b>: ${age} Jahre</p>
-  <p><b>Anschrift</b>: ${escapeHtml(address)}</p>
+  <p style="white-space: pre-wrap"><b>Anschrift</b>: ${escapeHtml(address)}</p>
   <p><b>Telefon</b>: ${escapeHtml(phone)}</p>
   <p><b>Weitere Informationen</b>: ${escapeHtml(moreInfo ?? '')}</p>
 </body>
 </html>`,
 	})
 
-	return Response.redirect('/angemeldet', 307)
+	const url = new URL('/angemeldet', request.url)
+	url.searchParams.set('id', v4())
+	return Response.redirect(url, 307)
 }
