@@ -43,3 +43,72 @@ a {
 		text-decoration-color: magenta;
 	}
 }
+
+.formi {
+	box-sizing: border-box;
+	border: 1.2px solid #b1b1b1;
+	border-radius: 7px;
+	background-color: white;
+	font: inherit;
+	font-size: 0.95rem;
+	padding: 10px 12px;
+	transition: border-color 0.2s;
+	width: 100%;
+	resize: vertical;
+
+	&:hover,
+	&:focus {
+		border-color: #70b3fa;
+	}
+
+	&:focus-visible {
+		outline: 3px solid #70b3fa;
+		outline-offset: -1px;
+	}
+
+	&.invalid {
+		border-color: #ff3131;
+		outline: 2px solid #ff3131;
+		outline-offset: -1px;
+	}
+}
+
+button.formi {
+	background-color: #eee;
+	border: 1px solid #ddd;
+	transition:
+		border-color 0.2s,
+		background-color 0.2s;
+
+	&:hover,
+	&:focus {
+		border-color: #70b3fa;
+		background-color: #badbff;
+	}
+
+	&:focus-visible {
+		outline: 3px solid #70b3fa;
+		outline-offset: -1px;
+	}
+
+	&.primary {
+		background-color: #006dcd;
+		color: white;
+		font-weight: bold;
+		border: none;
+
+		&:hover,
+		&:focus {
+			background-color: #00529a;
+		}
+
+		&:focus-visible {
+			outline: 3px solid #70b3fa;
+			outline-offset: 0;
+		}
+
+		&.disabled {
+			background-color: #000a;
+		}
+	}
+}

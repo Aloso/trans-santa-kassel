@@ -57,6 +57,7 @@
 		<textarea
 			{name}
 			value={value as string}
+			class="formi"
 			class:invalid={errorVisible}
 			{style}
 			oninput={e => (value = e.currentTarget.value as T)}
@@ -68,6 +69,7 @@
 			{type}
 			{name}
 			{value}
+			class="formi"
 			class:invalid={errorVisible}
 			{style}
 			oninput={e => (value = e.currentTarget.value as T)}
@@ -79,6 +81,7 @@
 			{type}
 			{name}
 			{value}
+			class="formi"
 			class:invalid={errorVisible}
 			{style}
 			oninput={e => (value = e.currentTarget.value as T)}
@@ -118,16 +121,7 @@
 
 	input,
 	textarea {
-		box-sizing: border-box;
 		border: 1.2px solid #de92de;
-		border-radius: 7px;
-		background-color: white;
-		font: inherit;
-		font-size: 0.95rem;
-		padding: 10px 12px;
-		transition: border-color 0.2s;
-		width: 100%;
-		resize: vertical;
 
 		&:hover {
 			border-color: #d080d0;
@@ -136,13 +130,6 @@
 		&:focus {
 			border-color: #e67ee6;
 			outline: 3px solid #e67ee6;
-			outline-offset: -1px;
-		}
-
-		&.invalid {
-			border-color: #ff3131;
-			outline: 2px solid #ff3131;
-			outline-offset: -1px;
 		}
 	}
 

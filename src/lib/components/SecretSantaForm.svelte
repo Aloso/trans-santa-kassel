@@ -77,14 +77,14 @@
 		required="Dieses Feld darf nicht leer sein"
 		{submitClicked}
 		hasError={phone =>
-			/^(00\d{1,2}|\+\d{1,2}|0)[\d]{7,16}$/.test(phone.replaceAll(/[ .\-()/\\]/g, '').trim())
+			/^(00\d{1,3}|\+\d{1,3}|0)[\d]{7,16}$/.test(phone.replaceAll(/[ .\-()/\\]/g, '').trim())
 				? false
 				: 'Die Telefonnummer ist ungültig'}
 	/>
 	<ValidatedInput
 		type="textarea"
 		label="Weitere Informationen"
-		label2="Hast du besondere Wünsche oder möchtest etwas über zu dir sagen? Dann gib es hier ein."
+		label2="Hast du besondere Wünsche oder möchtest etwas zu dir sagen? Dann gib es hier ein."
 		name="moreInfo"
 		bind:value={moreInfo}
 		bind:error={moreInfoError}

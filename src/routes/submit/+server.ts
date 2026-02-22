@@ -21,6 +21,13 @@ export async function POST({ request, platform }): Promise<Response> {
 	if (!/^(00\d{1,2}|\+\d{1,2}|0)[\d]{7,16}$/.test(phone.replaceAll(/[ .\-()/\\]/g, '').trim()))
 		error(400, 'Invalid phone number')
 
+	await platform.env.DB.prepare(
+		`INSERT INTO secret_santa (id, created, name, phone, address, age, moreInfo, verified)
+		VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)`,
+	)
+		.bind(v4(), Date.now(), name, phone, address, age, moreInfo ?? null, 0)
+		.run()
+
 	const { WorkerMailer } = await import('worker-mailer')
 
 	// Connect to SMTP server

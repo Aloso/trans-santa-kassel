@@ -1,3 +1,5 @@
+import type { D1Database } from '@cloudflare/workers-types'
+
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
@@ -7,7 +9,7 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 
-		type EnvVars = {
+		type EnvVars = Record<`ADMIN__${string}`, string> & {
 			DB: D1Database
 
 			ADMIN_RECIPIENTS: string
