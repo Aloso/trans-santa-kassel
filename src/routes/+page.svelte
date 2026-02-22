@@ -12,9 +12,9 @@
 </p>
 
 <p>
-	Deshalb starten wir dieses Jahr unser gemeinsames Wichtel-Projekt exklusiv für die
-	Trans*-Community. Ganz egal, wo du auf deinem Weg gerade stehst – wir möchten, dass du weißt: Du
-	bist gesehen, du bist wertvoll und du bist Teil einer großartigen Gemeinschaft.
+	Deshalb starten wir dieses Jahr unser gemeinsames Wichtel-Projekt exklusiv für Trans* Kinder und
+	Jugendliche. Ganz egal, wo du auf deinem Weg gerade stehst – wir möchten, dass du weißt: Du bist
+	gesehen, du bist wertvoll und du bist Teil einer großartigen Gemeinschaft.
 </p>
 
 <p>So funktioniert’s:</p>

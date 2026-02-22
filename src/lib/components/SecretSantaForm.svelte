@@ -53,7 +53,7 @@
 	<ValidatedInput
 		type="textarea"
 		label="Bevorzugte Anschrift"
-		label2="Gib deine Adresse an. Du kannst hier auch den Namen angeben, der auf dem Paket stehen soll."
+		label2="Gib deine Adresse an. Das kann auch die Adresse von Freund*innen oder anderen Menschen sein, denen du vertraust. Du kannst hier auch den Namen angeben, der auf dem Paket stehen soll."
 		name="address"
 		bind:value={address}
 		bind:error={addressError}
