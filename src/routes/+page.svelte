@@ -2,7 +2,9 @@
 	import SecretSantaForm from '$lib/components/SecretSantaForm.svelte'
 </script>
 
-<h1>Trans* Santa Kassel</h1>
+<h1 style="line-height: 100%;">
+	Geschenk<br />Trans<span style="color:#d2b;margin:0 -0.05em">*</span>port
+</h1>
 <p>Hallo du wunderbarer Mensch! 🏳️‍⚧️</p>
 
 <p>
