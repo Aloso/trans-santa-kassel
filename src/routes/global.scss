@@ -7,7 +7,6 @@
 	font-size: calc(1em + 0.2vw);
 	letter-spacing: 0.01em;
 	font-weight: 480;
-	line-height: 1.5em;
 }
 
 body {
@@ -15,8 +14,19 @@ body {
 	padding: 0;
 }
 
-p {
+p,
+ul,
+ol,
+table,
+blockquote,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin: 1rem 0;
+	line-height: 155%;
 }
 
 strong,
@@ -40,6 +50,7 @@ a {
 	&:hover,
 	&:focus {
 		color: #0b54ff;
+		text-decoration: underline;
 		text-decoration-color: magenta;
 	}
 }

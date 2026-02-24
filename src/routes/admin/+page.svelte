@@ -33,7 +33,7 @@
 			: seconds > -3600
 				? rtf1.format(Math.round(seconds / 60), 'minute')
 				: seconds > -86400
-					? rtf1.format(Math.round(seconds / 86400), 'hour')
+					? rtf1.format(Math.round(seconds / 3600), 'hour')
 					: new Date(timestamp).toLocaleDateString('de', {
 							year: '2-digit',
 							month: '2-digit',
@@ -51,7 +51,9 @@
 	<title>Admin | Trans* Santa Kassel</title>
 </svelte:head>
 
-<h1>Registrierungen</h1>
+<h1>Administration</h1>
+
+<h2>Registrierungen</h2>
 
 <table class="reg-table">
 	<thead>
