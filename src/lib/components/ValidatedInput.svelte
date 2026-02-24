@@ -109,7 +109,7 @@
 		display: block;
 		margin: 0 0 0.5rem;
 		font-size: 1.1rem;
-		font-weight: 600;
+		font-weight: 650;
 	}
 	.label2-text {
 		display: block;
