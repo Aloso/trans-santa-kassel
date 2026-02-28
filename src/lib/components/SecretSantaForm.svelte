@@ -20,21 +20,21 @@
 
 	let submitClicked = $state(false)
 
-	let isVerified = $state(true)
+	let turnstile = $state<'off' | 'invalid' | 'valid'>('off')
 	onMount(() => {
-		if (location.protocol === 'https:') {
-			// not on dev server
-			window.onloadTurnstileCallback = () => {
-				const widgetId = window.turnstile.render('#turnstile-container', {
-					sitekey: import.meta.env.VITE_PUBLIC_TURNSTILE_SITE_KEY,
-					callback: () => {
-						isVerified = true
-					},
-					'expired-callback': () => {
-						isVerified = false
-					},
-				})
-			}
+		turnstile = 'invalid'
+		window.onloadTurnstileCallback = () => {
+			console.log('loaded, rendering turnstile')
+
+			window.turnstile.render('#turnstile-container', {
+				sitekey: import.meta.env.VITE_PUBLIC_TURNSTILE_SITE_KEY,
+				callback: () => {
+					turnstile = 'valid'
+				},
+				'expired-callback': () => {
+					turnstile = 'invalid'
+				},
+			})
 		}
 	})
 </script>
@@ -136,8 +136,8 @@
 
 	<div id="turnstile-container"></div>
 
-	<SubmitButton disabled={!isVerified || (submitClicked && !!formError)}>
-		{isVerified ? 'Anmelden' : 'Captcha wird noch gelöst...'}
+	<SubmitButton disabled={turnstile === 'invalid' || (submitClicked && !!formError)}>
+		{turnstile === 'invalid' ? 'Captcha wird noch gelöst...' : 'Anmelden'}
 	</SubmitButton>
 </form>
 
