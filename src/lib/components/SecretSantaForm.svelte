@@ -21,27 +21,29 @@
 	let submitClicked = $state(false)
 
 	let turnstile = $state<'off' | 'invalid' | 'valid'>('off')
-	onMount(() => {
-		turnstile = 'invalid'
-		window.onloadTurnstileCallback = () => {
-			console.log('loaded, rendering turnstile')
-
-			window.turnstile.render('#turnstile-container', {
-				sitekey: import.meta.env.VITE_PUBLIC_TURNSTILE_SITE_KEY,
-				callback: () => {
-					turnstile = 'valid'
-				},
-				'expired-callback': () => {
-					turnstile = 'invalid'
-				},
-			})
-		}
-	})
 </script>
 
 <svelte:head>
 	{#if browser && location.protocol === 'https:'}
-		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+		<script
+			src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+			async
+			defer
+			onload={() => {
+				turnstile = 'invalid'
+				console.log('rendering turnstile')
+
+				window.turnstile.render('#turnstile-container', {
+					sitekey: import.meta.env.VITE_PUBLIC_TURNSTILE_SITE_KEY,
+					callback: () => {
+						turnstile = 'valid'
+					},
+					'expired-callback': () => {
+						turnstile = 'invalid'
+					},
+				})
+			}}
+		></script>
 	{/if}
 </svelte:head>
 
