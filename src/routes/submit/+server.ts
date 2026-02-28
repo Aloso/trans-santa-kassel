@@ -6,6 +6,8 @@ import { v4 } from 'uuid'
 export async function POST({ request, platform }): Promise<Response> {
 	if (!platform) error(500, 'Platform not available')
 
+	console.log(platform.cf)
+
 	const formData = await request.formData()
 	const name = formDataText(formData, 'name') ?? error(400, 'Missing name')
 	const age = +(formDataText(formData, 'age') ?? error(400, 'Missing age'))
