@@ -9,7 +9,7 @@
 	let { disabled, children }: Props = $props()
 </script>
 
-<button type="submit" class="formi primary" class:disabled>
+<button type="submit" class="formi primary block" class:disabled>
 	{@render children()}
 </button>
 

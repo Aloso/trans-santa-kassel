@@ -3,10 +3,12 @@ import { formDataText } from '../../backend/helper'
 import { escapeHtml } from '../../backend/sanitize'
 import { v4 } from 'uuid'
 
-export async function POST({ request, platform }): Promise<Response> {
+export async function POST({ request, platform, getClientAddress }): Promise<Response> {
 	if (!platform) error(500, 'Platform not available')
 
-	console.log(platform.cf)
+	if ((platform.cf?.botManagement.score ?? 100) < 30) {
+		error(403, 'Error: bot detected')
+	}
 
 	const formData = await request.formData()
 	const name = formDataText(formData, 'name') ?? error(400, 'Missing name')
@@ -14,6 +16,10 @@ export async function POST({ request, platform }): Promise<Response> {
 	const address = formDataText(formData, 'address') ?? error(400, 'Missing address')
 	const phone = formDataText(formData, 'phone') ?? error(400, 'Missing phone')
 	const moreInfo = formDataText(formData, 'moreInfo')
+
+	const turnstile =
+		formDataText(formData, 'cf-turnstile-response') ?? error(400, 'Captcha not solved')
+	verifyCaptcha(turnstile, getClientAddress(), platform)
 
 	if (name === '') error(400, 'Invalid name')
 	if (Number.isNaN(age) || age < 12) error(400, 'Invalid age')
@@ -64,4 +70,21 @@ export async function POST({ request, platform }): Promise<Response> {
 	const url = new URL('/angemeldet', request.url)
 	url.searchParams.set('id', v4())
 	return Response.redirect(url, 303)
+}
+
+async function verifyCaptcha(token: string, ip: string, platform: App.Platform) {
+	const formData = new FormData()
+	formData.append('secret', platform.env.TURNSTILE_SECRET_KEY)
+	formData.append('response', token)
+	formData.append('remoteip', ip)
+
+	const result = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+		body: formData,
+		method: 'POST',
+	})
+	const outcome = await result.json()
+
+	if (!outcome.success) {
+		error(403, 'Turnstile captcha verification failed')
+	}
 }

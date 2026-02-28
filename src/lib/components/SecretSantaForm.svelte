@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import SubmitButton from '$lib/components/SubmitButton.svelte'
 
 	import ValidatedInput from '$lib/components/ValidatedInput.svelte'
+	import { onMount } from 'svelte'
 
 	let name = $state('')
 	let age = $state<number>()
@@ -17,7 +19,31 @@
 	let formError = $derived(nameError || ageError || addressError || phoneError)
 
 	let submitClicked = $state(false)
+
+	let isVerified = $state(true)
+	onMount(() => {
+		if (location.protocol === 'https:') {
+			// not on dev server
+			window.onloadTurnstileCallback = () => {
+				const widgetId = window.turnstile.render('#turnstile-container', {
+					sitekey: import.meta.env.VITE_PUBLIC_TURNSTILE_SITE_KEY,
+					callback: () => {
+						isVerified = true
+					},
+					'expired-callback': () => {
+						isVerified = false
+					},
+				})
+			}
+		}
+	})
 </script>
+
+<svelte:head>
+	{#if browser && location.protocol === 'https:'}
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	{/if}
+</svelte:head>
 
 <form
 	method="POST"
@@ -108,7 +134,11 @@
 		style="--min-height: 150px"
 	/>
 
-	<SubmitButton disabled={submitClicked && !!formError}>Anmelden</SubmitButton>
+	<div id="turnstile-container"></div>
+
+	<SubmitButton disabled={!isVerified || (submitClicked && !!formError)}>
+		{isVerified ? 'Anmelden' : 'Captcha wird noch gelöst...'}
+	</SubmitButton>
 </form>
 
 <style lang="scss">

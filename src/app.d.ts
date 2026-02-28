@@ -3,6 +3,12 @@ import type { D1Database, IncomingRequestCfProperties } from '@cloudflare/worker
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
+	var onloadTurnstileCallback: () => void
+	var turnstile: {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render: (id: string, options: any) => void
+	}
+
 	namespace App {
 		// interface Error {}
 		// interface Locals {}
@@ -16,6 +22,8 @@ declare global {
 			SMTP_USERNAME: string
 			SMTP_PASSWORD: string
 			SMTP_HOST: string
+
+			TURNSTILE_SECRET_KEY: string
 		}
 
 		interface Platform {

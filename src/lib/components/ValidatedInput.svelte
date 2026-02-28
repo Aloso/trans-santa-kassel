@@ -100,7 +100,7 @@
 <style lang="scss">
 	label {
 		display: block;
-		margin: 1.2rem 0 0 0;
+		margin: 1.2rem 0;
 		&:first-child {
 			margin-top: 0;
 		}
